@@ -1,0 +1,106 @@
+<html>
+<head>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <title>Sudish</title>
+
+
+</head>
+<body style="background-color:black;color:white;text-align:center;margin-top:4%;color: black">
+
+<div class="container jumbotron">
+	<div class="page-header">
+    <h1 class="text-success">TIC TAC TOE</h1>      
+  	</div>
+	<div class="row justify-content-center" id="btn">
+	</div>
+	<div class="row justify-content-center" id="btn1">
+	</div>
+	<div class="row justify-content-center" id="btn2">
+	<button hidden="true"></button>
+	</div>
+	<div class="row justify-content-center border border-dark rounded-left" style="margin-top: 50px" >
+		<h1 id="winner">Play Smart</h1><h1> ----||----  <a href="tictaktoe.html">Play Again</a></h1>
+	</div>
+</div>
+
+</div>
+<script>
+		var button ='class="btn-dark" style="height: 100px;width: 100px"></button>'
+		for(i=1;i<4;i++)
+			$("#btn").append('<button type="button" id='+i+' ' + button+' ')
+		for(i=4;i<7;i++)
+			$("#btn1").append('<button type="button" id='+i+' '+ button+' ')
+		for(i=7;i<10;i++)
+			$("#btn2").append('<button type="button" id='+i+' '+ button+' ')
+		var turn =0
+		var winner=false
+		
+		f= function(value){
+			if(
+				(
+					($('#1').attr('class') == value) && 
+					(
+					(($('#2').attr('class') == value) && ($('#3').attr('class') == value)) ||
+					(($('#4').attr('class') == value) && ($('#7').attr('class') == value)) ||
+					(($('#5').attr('class') == value) && ($('#9').attr('class') == value))
+					)
+				) || (
+					($('#5').attr('class') == value) && 
+					(
+					(($('#2').attr('class') == value)&& ($('#8').attr('class') == value)) ||
+					(($('#4').attr('class')== value) && ($('#6').attr('class') == value)) ||
+					(($('#7').attr('class') == value) && ($('#3').attr('class') == value))
+					)
+				)
+			  ){
+				return true
+			}
+		}
+		// for(i=1;i<10;i++){
+		// 	$('#'+i).click(function(){
+		// 		if (turn%2==0){
+		// 			$('#'+i).attr("class","btn-success")
+		// 			prompt(i)
+		// 		}
+		// 		else{
+		// 			$('#'+i).attr("class","btn-danger")
+		// 			prompt(i)
+		// 		}
+		// 		turn+=1
+		// 	})
+		// }
+		$( "button" ).each(function( index ) {
+		$('#'+index).click(function(){
+			if (winner==false) {
+					if (turn%2==0){
+						$('#'+index).attr("class","btn-success")
+						if(f('btn-success')==true){
+							$('#winner').text("Green Is the Winner")
+							winner=true
+						}
+							
+					}
+					else{
+						$('#'+index).attr("class","btn-danger")
+						if(f('btn-danger')==true){
+							$('#winner').text("Red Is the Winner")
+							winner=true
+						}
+							
+						}
+					}
+				turn += 1
+				if (turn==8) {
+					$('#winner').text("It's a Draw")
+					winner=true
+				}
+			})	
+		});
+		
+</script>
+</body>
+</html>
